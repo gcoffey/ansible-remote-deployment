@@ -1,9 +1,9 @@
 #!/bin/bash
 
-SSHPORT=<SSH_PORT>
-HOSTGROUP="<ANSIBLE_HOST_GROUP>"
+SSHPORT=<SSHPORT>
+HOSTGROUP="<SSHPORT>"
 ARDS_KEY_URL="http://<ARDS_SERVER_URL>/ards/ansible-ssh-key"
-ARDS_ADD_URL="http://<ARDS_SERVER_URL/ards/add-server"
+ARDS_ADD_URL="http://<ARDS_SERVER_URL>/ards/add-server"
 LOGFILE="/var/log/ards_bootstrap.log"
 
 
@@ -47,25 +47,15 @@ then
   mv /etc/ssh/sshd_config.new /etc/ssh/sshd_config
 fi
 
-# Check SSH is running
-CHECKSSH=`netstat -na | grep ${SSHPORT} | grep LISTEN | wc -l`
-
-if [[ "${CHECKSSH}" == "0" ]];
+# Always restart SSH
+if [[ -f /etc/init.d/ssh ]];
 then
-  if [[ -f /etc/init.d/ssh ]];
+  service ssh restart
+else
+  if [[ -f /etc/init.d/sshd ]];
   then
-    service ssh restart
-  else
-    if [[ -f /etc/init.d/sshd ]];
-    then
-      service sshd restart
-    fi
+    service sshd restart
   fi
-  if [[ "$?" != "0" ]];
-  then
-    echo "ERROR: SSH cannot be started"
-    exit 1
-  fi 
 fi
 
 # Check the ansible user exists
