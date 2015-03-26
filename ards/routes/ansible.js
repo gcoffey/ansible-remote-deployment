@@ -50,9 +50,10 @@ exports.addServer = function(req, res) {
   }
 }
 
-exports.fileDownload = function(req, res, file) {
+function fileDownloader(req, res, file) {
+  logger.info(file);
   var stat = fileSystem.statSync(file);
- 
+
   if (stat.isFile()) {
     res.writeHead(200, {
       'Content-Type': 'text/plain',
@@ -66,5 +67,13 @@ exports.fileDownload = function(req, res, file) {
       'Content-Length': 0
     });
   }
+}
+
+exports.bootstrapScript = function(req, res) {
+  return fileDownloader(req, res, config.ards.bootstrap_script);
+}
+
+exports.ansibleSshKey = function(req, res) {
+  return fileDownloader(req, res, config.ards.ansible_ssh_key);
 }
 

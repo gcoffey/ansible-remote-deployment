@@ -4,10 +4,9 @@ var kue = require('kue');
 var fs = require('fs');
 var config = require('./config.json');
 var logger = require('./logger.js');
-var process = require('child_process').spawn;
+var process = require('child_process').exec;
 var util = require('util');
 var sys = require('sys');
-var exec = require('exec');
 
 var buildQueue = kue.createQueue({ 
   redis: {
@@ -24,7 +23,7 @@ buildQueue.process('build', config.queue.concurrency, function(job, done) {
   job.log('Executing Ansible');
   job.log('ansible-playbook ' + config.ansible.playbook + ' ' + formatArgs);
 
-  var proc = spawn('ansible-playbook ' + config.ansible.playbook + ' ' + formatArgs);
+  var proc = process('ansible-playbook '+config.ansible.playbook+' '+formatArgs, [ { maxBuffer: 200*2048 } ]);
 
     proc.stdout.on('data', function (data) {
       job.progress(job_progress, 100);
