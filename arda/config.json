@@ -1,0 +1,15 @@
+{
+    "arda": {
+        "listen_port": 8181
+    },
+    "logger": {
+        "app_log": "/var/log/ards.log",
+        "debug_log": "/var/log/ards_debug.log",
+        "error_log": "/var/log/ards_error.log"
+    },
+    "database": {
+        "file": "./db/arda.db"
+    } 
+}
+
+ 

@@ -1,0 +1,23 @@
+{
+    "arde": {
+        "listen_port": 8081,
+        "admin_page_title": "Ansible Build Queue"
+    },
+    "logger": {
+        "app_log": "/var/log/arde.log",
+        "debug_log": "/var/log/arde_debug.log",
+        "error_log": "/var/log/arde_error.log"
+    },
+    "queue": {
+        "concurrency": 2,
+        "port": 6379,
+        "server": "127.0.0.1"
+    }, 
+    "ansible": {
+        "args": "-e \"CLIENT_IP=%s SSH_PORT=%s CLIENT_HOSTNAME=%s HOST_GROUP=%s\" -vvv",
+        "playbook": "playbooks/teststrap.yml",
+        "private_key": "keys/ansible.key"
+    }
+}
+
+ 

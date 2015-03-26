@@ -1,0 +1,26 @@
+{
+  "name": "ards",
+  "version": "1.0.0",
+  "description": "Ansible Remote Deployment Scheduler",
+  "main": "ards.js",
+  "scripts": {
+    "start": "nohup nodejs ards.js &",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Ansible",
+    "remote",
+    "deployment",
+    "bootstrap"
+  ],
+  "author": "Gareth Coffey",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.12.2",
+    "express": "^4.12.3",
+    "kue": "^0.8.11",
+    "node-uuid": "^1.4.3",
+    "tcp-ping": "^0.1.1",
+    "winston": "^0.9.0"
+  }
+}
