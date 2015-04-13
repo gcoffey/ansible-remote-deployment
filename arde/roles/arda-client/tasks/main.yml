@@ -1,0 +1,4 @@
+---
+
+- include: checkin.yml
+  when: method == 'checkin'

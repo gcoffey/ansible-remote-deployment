@@ -1,0 +1,9 @@
+---
+
+- name: Generate JSON data
+  template: src=checkin.json.j2 dest=/tmp/{{ serveraddr }}.json owner=root group=root mode=644  
+ 
+#- name: Send job data to ARDA server (basic auth)
+#  uri: url="{{ arda.url }}"
+#       method=POST user="{{ arda.user }}" password="{{ arda.password }}"
+#       body="{ 

@@ -1,0 +1,13 @@
+{
+  "server_id": "{{ CLIENT_HOSTNAME }}",
+  "server_ip": "{{ CLIENT_IP }}",
+  "ansible": {
+     "job_arguments": "",
+     "job_log": { "" },
+     "job_playbook": "",
+     "job_status": "",
+     "run_as": "{{ ansible_user_id }}",
+     "run_by": "{{ ansible_env.SUDO_USER }}",
+     "run_time": "{{ ansible_date_time.iso8601 }}"
+  }
+}
