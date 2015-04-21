@@ -24,6 +24,8 @@
     "method-override": "*",
     "nodemon": "*",
     "nosql": "^3.0.2",
+    "passport": "*",
+    "passport-local": "*",
     "serve-favicon": "*",
     "session": "^0.1.0",
     "stylus": "*",

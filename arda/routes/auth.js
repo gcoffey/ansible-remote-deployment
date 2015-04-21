@@ -5,7 +5,7 @@ module.exports = function(App)
   App.get('/login', function(req, res) {
     res.render('login', { title: 'Login' })
   });
-  App.post('/login', function(req, res) {
+/**  App.post('/login', function(req, res) {
     req.checkBody('username', 'Username is required').notEmpty();
     req.checkBody('password', 'Password is required').notEmpty();
     var errors = req.validationErrors();
@@ -21,6 +21,9 @@ module.exports = function(App)
     var username = req.body.username;
     var password = req.body.password;
   });
+**/
+  App.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login', failureFlash: true }));
+
   App.get('/logout', function(req, res) {
     req.session.destroy();
     res.redirect('login');
