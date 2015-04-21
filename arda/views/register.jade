@@ -1,0 +1,25 @@
+extends layout
+
+block content
+  div.container
+    h1 Register
+    p 
+      | Please register or 
+      a(href="/login") click here 
+      | to login.
+    .login.well
+      include messages
+      hr
+      form(id='register-form', method='POST', action='/register' novalidate)
+        .form-group
+          label(for='username') Username
+          input(type='text', name='username', class='form-control', id='username', placeholder='Enter username', required, data-required-msg='Username is required')
+        .form-group
+          label(for='email') Email
+          input(type='email', name='email', class='form-control', id='email', placeholder='Enter email', required, data-required-msg='Email address is required')
+        .form-group
+          button.btn.btn-default Register
+  script(src='//code.jquery.com/jquery-1.9.1.min.js')
+  script(src='//cdn.kendostatic.com/2013.3.1119/js/kendo.all.min.js')
+  script(src='javascripts/validate.js')
+

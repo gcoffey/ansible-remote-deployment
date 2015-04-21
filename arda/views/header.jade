@@ -1,0 +1,17 @@
+div.navbar.navbar-inverse.navbar-fixed-top(role='navigation')
+  div.container
+    div.navbar-header
+      button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+      span.icon-bar
+      span.icon-bar
+      span.icon-bar
+      div.collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li(class=title=='Home'?'active':undefined)
+            a(href="/") Home
+          li(class=title=='Status'?'active':undefined)
+            a(href="/status") Status
+          li(class=title=='Deploy'?'active':undefined)
+            a(href="/deploy") Deploy
+          li(class=title=='Config'?'active':undefined)
+            a(href="/config") Config

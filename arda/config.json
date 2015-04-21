@@ -1,6 +1,10 @@
 {
     "arda": {
-        "listen_port": 8181
+        "listen_port": 8181,
+        "session_secret": "ssssh"
+    },
+    "ards": {
+        "listen_port": 8080
     },
     "logger": {
         "app_log": "/var/log/ards.log",
@@ -8,7 +12,7 @@
         "error_log": "/var/log/ards_error.log"
     },
     "database": {
-        "file": "./db/arda.db"
+        "file": "./db/arda.nosql"
     } 
 }
 
