@@ -1,19 +1,18 @@
 # ansible-remote-deployment
 
-A suite of services that enable servers / desktop machines, to be bootstrapped, configured & managed using Ansible.
+Provides a simple method to trigger the execution of an Ansible playbook against any machine.
 
-The suite consists of 3 components:-
+There are 4 processes...
 
+ARDA - Admin UI
+You can track the status of deployments, define machine groups & the playbooks they can run and upload public SSH keys & shell scripts.
 
-ARDA - Ansible Remote Deployment Admin - A web UI and control interface to allow the tracking of current deployments, the execution of new deployments and the management of server / desktop machines. An API will be exposed to allow server / desktop machines to interact with during Ansible execution.
-The end goal is to provide a UI that users can interact with and an API that Ansible playbooks can POST data to.
+ARDE - Executor 
+Attaches to a message queue topic and waits for new jobs, it will then execute the job. The executor can be deployed on a seperate instance, it just requires access to the message queue (ARDQ) and your Ansible playbook repository.
 
+ARDS - Scheduler
+Provides an API which servers / desktops / instances can send data, once verified it then creates a job which is pushed to a message queue topic.
+The scheduler can also host static assets such as public SSH keys (to allow the executor user to connect) and shell scripts.
 
-ARDE - Ansible Remote Deployment Executor - ARDE watches a message queue, when a job enters the queue, the job data is extracted and the client details are then used to execute a playbook.
-
-
-
-ARDS - Ansible Remote Deployment Scheduler - ARDS provides an API that accepts POST data, in JSON format, from server / desktop machines. ARDS can only accept data sent from the machine that is to be bootstrapped / configured.
-Once data has been checked, a job is created and placed into the build queue (based on kue+redis). 
-ARDS can host static content such as bootstrap scripts & public keys that can be used, for example, during the OS installation process.
-
+ARDQ - Message Queue
+Provides a message queue function for the executor and scheduler. You can define a message queue topic against a machine group, this is used by the scheduler when new jobs are created. If you run multiple executors, you can pin each to a different message queue topic.
